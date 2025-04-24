@@ -1,0 +1,88 @@
+# examples of different queries 
+. Boolean Search Queries (AND/OR/NOT)
+"military AND service"
+(Should match "Dragon Trap" with Ensar's military background)
+
+"zombie OR undead"
+(Should match "Ada: Zombilerin Düğünü" about zombies)
+
+"comedy NOT wedding"
+(Should exclude "Romantik Komedi" which focuses on weddings)
+
+2. Phrase Search (Exact Match)
+"compulsory military service"
+(Exact phrase from "Dragon Trap")
+
+"remote island in Istanbul"
+(From "Ada: Zombilerin Düğünü")
+
+"heart attack"
+(From "Once Upon a Time in Anatolia")
+
+3. Biword Search (Consecutive Word Pairs)
+"military service"
+(Key phrase in "Dragon Trap" and "Free Man")
+
+"small town"
+(From "Merry-Go-Round" and "Hayde Bre")
+
+"heart disease"
+(From "Toll Booth" and "Black and White")
+
+4. Genre-Specific Queries
+Horror:
+"strange voice" (From "The Voice")
+"zombie invasion" (From "Ada: Zombilerin Düğünü")
+
+Drama:
+"buried alive" (From "Once Upon a Time in Anatolia")
+"prostitute transvestites" (From "Other Angels")
+
+Comedy:
+"clarinet village" (From "Eyyvah Eyvah")
+"ridiculous plan" (From "Jackal")
+
+5. Character/Title References
+"Recep İvedik"
+(Main character in comedy series)
+
+"Signora Enrica"
+(Title character in Italian-Turkish drama)
+
+"Atatürk"
+(From "Dersimiz: Atatürk")
+
+6. Location-Based Queries
+"Anatolia"
+*(Matches 5+ films including "Once Upon a Time in Anatolia")*
+
+"Istanbul"
+*(Appears in 80% of your sample - good stress test)*
+
+"Bosporus Bridge"
+(Specific to "Men on the Bridge")
+
+7. Edge Cases
+Short Words:
+"war" (Disabled by your len(token) > 2 filter)
+"oil" (From "Secret of the Sultan" - tests stemming)
+
+Stopwords:
+"the voice" (Should ignore "the" and match "voice")
+
+Evaluation Tips
+Verify Stemming:
+
+Query: "running" should match "run" in plots due to PorterStemmer.
+
+Check NOT Logic:
+
+"village NOT Istanbul" should exclude urban stories.
+
+Test Biword Precision:
+
+"New York" should only match the film Five Minarets in New York.
+
+Monitor Speed:
+
+Boolean queries with 3+ terms (e.g., "military AND service AND trauma") should return instantly.
